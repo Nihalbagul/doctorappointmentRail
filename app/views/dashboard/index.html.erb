@@ -1,0 +1,75 @@
+<h1>Registered Patients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Registered At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.name %></td>
+        <td><%= patient.age %></td>
+        <td><%= patient.address %></td>
+        <td><%= patient.phone %></td>
+        <td><%= patient.registered_at.strftime("%Y-%m-%d") if patient.registered_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<h2>Patient Registrations Over Time</h2>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+<canvas id="patientRegistrationChart" width="400" height="200"></canvas>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('patientRegistrationChart').getContext('2d');
+    const data = {
+      labels: <%= @patient_registration_data.keys.map(&:to_json).to_json.html_safe %>,
+      datasets: [{
+        label: 'Patients Registered',
+        data: <%= @patient_registration_data.values.to_json.html_safe %>,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderWidth: 1,
+        fill: true
+      }]
+    };
+
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'day',
+              tooltipFormat: 'YYYY-MM-DD', // Customize the tooltip format if needed
+            },
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Number of Patients'
+            }
+          }
+        }
+      }
+    });
+  });
+</script>

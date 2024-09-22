@@ -1,0 +1,45 @@
+<h1>Edit Patient</h1>
+
+<%= form_with(model: @patient, local: true) do |form| %>
+  <% if @patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+      <ul>
+        <% @patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :age %>
+    <%= form.number_field :age, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :phone %>
+    <%= form.telephone_field :phone %>
+  </div>
+
+  <div>
+    <%= form.label :registered_at %>
+    <%= form.datetime_select :registered_at %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Patient" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', patients_path %>

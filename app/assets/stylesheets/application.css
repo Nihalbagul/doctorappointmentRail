@@ -1,0 +1,47 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap";
+ /* app/assets/stylesheets/application.scss */
+
+@import "custom"; 
+
+ /* app/assets/stylesheets/custom.css or custom.scss */
+/* app/assets/stylesheets/custom.css */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form .form-control {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .login-form .btn {
+    font-size: 18px;
+    padding: 10px;
+  }
+  
+  .alert {
+    font-size: 14px;
+    padding: 10px;
+  }
+  

@@ -1,0 +1,41 @@
+<h1>Patients List</h1>
+
+<%= link_to 'Add New Patient', new_patient_path, class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Registered At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.name %></td>
+        <td><%= patient.age %></td>
+        <td><%= patient.address %></td>
+        <td><%= patient.phone %></td>
+        <td><%= patient.registered_at.strftime("%Y-%m-%d") if patient.registered_at %></td>
+        <td>
+          <%= link_to 'Show', patient_path(patient) %>
+          <%= link_to 'Edit', edit_patient_path(patient) %>
+          <%= form_with(url: patient_path(patient), method: :delete, local: true) do |form| %>
+            <%= form.submit 'Delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+          <% end %>
+          
+
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @patients.empty? %>
+  <p>No patients found.</p>
+<% end %>
